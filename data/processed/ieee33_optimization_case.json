@@ -1,0 +1,36 @@
+{
+  "metadata": {
+    "name": "IEEE 33-bus synthetic EV charging allocation benchmark",
+    "source_kind": "synthetic",
+    "method": "Five electrically diverse candidate buses selected for computational validation; costs and charging demand are hypothetical and must not be interpreted as measured data."
+  },
+  "network_path": "data/networks/ieee33.json",
+  "demand_kw": 180.0,
+  "power_factor": 0.95,
+  "charger": {
+    "power_kw": 60.0,
+    "capex": 55000.0,
+    "annualization_factor": 0.12
+  },
+  "economics": {
+    "station_fixed_cost": 30000.0,
+    "energy_price_per_kwh": 0.15,
+    "annual_peak_equivalent_hours": 1500.0,
+    "unserved_penalty_per_kw": 1000000.0,
+    "voltage_penalty_per_pu": 100000000.0
+  },
+  "constraints": {
+    "voltage_min_pu": 0.90,
+    "voltage_max_pu": 1.05,
+    "max_stations": 3,
+    "max_chargers_per_station": 3,
+    "minimum_served_fraction": 1.0
+  },
+  "candidates": [
+    {"id": "C02", "bus": 2, "connection_cost": 12000.0},
+    {"id": "C06", "bus": 6, "connection_cost": 9000.0},
+    {"id": "C18", "bus": 18, "connection_cost": 5000.0},
+    {"id": "C25", "bus": 25, "connection_cost": 7000.0},
+    {"id": "C33", "bus": 33, "connection_cost": 6000.0}
+  ]
+}
