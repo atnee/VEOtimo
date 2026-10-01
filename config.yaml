@@ -1,0 +1,121 @@
+{
+  "study": {
+    "name": "synthetic_ieee33_baseline",
+    "city": "synthetic",
+    "country": "synthetic",
+    "modeling_level": 1,
+    "electrical_network": "IEEE_33",
+    "road_network": "synthetic",
+    "timezone": "UTC"
+  },
+  "reproducibility": {
+    "seed": 42,
+    "output_root": "results"
+  },
+  "time": {
+    "start": "2026-01-01T00:00:00",
+    "periods": 24,
+    "resolution_minutes": 60
+  },
+  "inputs": {
+    "road_network": "data/raw/road_network.graphml",
+    "mobility_od": "data/raw/mobility_od.csv",
+    "transformers": "data/raw/transformers.csv",
+    "candidates": "data/raw/candidates.csv",
+    "electrical_network": "data/networks/ieee33.json"
+  },
+  "electrical": {
+    "engine": "pandapower",
+    "optimization_approximation": "lindistflow",
+    "validation_model": "ac",
+    "voltage_min_pu": 0.95,
+    "voltage_max_pu": 1.05,
+    "transformer_loading_limit": 0.8,
+    "near_limit_fraction": 0.9,
+    "power_factor": 0.95,
+    "transformer_catalog_kva": [
+      30,
+      45,
+      75,
+      112.5,
+      150,
+      225,
+      300,
+      500,
+      750,
+      1000
+    ]
+  },
+  "mobility": {
+    "ev_penetration": 0.1,
+    "max_detour_km": 5.0,
+    "min_served_fraction": 0.95,
+    "distance_metric": "road_network"
+  },
+  "queueing": {
+    "model": "mmc",
+    "max_utilization": 0.85,
+    "max_mean_wait_minutes": 15
+  },
+  "chargers": {
+    "catalog": [
+      {
+        "id": "ac_medium",
+        "power_kw": 22,
+        "efficiency": 0.94,
+        "capex": 12000,
+        "opex_annual": 600,
+        "lifetime_years": 10,
+        "max_ports": 1
+      },
+      {
+        "id": "dc_fast",
+        "power_kw": 60,
+        "efficiency": 0.95,
+        "capex": 55000,
+        "opex_annual": 2500,
+        "lifetime_years": 10,
+        "max_ports": 1
+      }
+    ]
+  },
+  "optimization": {
+    "algorithm": "ga",
+    "population": 50,
+    "iterations": 100,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "max_stations": 10,
+    "budget": null,
+    "weights": {
+      "infrastructure_cost": 1.0,
+      "grid_reinforcement_cost": 1.0,
+      "travel_cost": 1.0,
+      "waiting_cost": 1.0,
+      "unserved_cost": 1.0,
+      "losses_cost": 1.0
+    },
+    "penalties": {
+      "voltage": 1000000,
+      "transformer_overload": 1000000,
+      "line_overload": 1000000,
+      "unserved": 1000000,
+      "queue": 1000000
+    }
+  },
+  "scenarios": {
+    "strategies": [
+      "mobility_only",
+      "electrical_only",
+      "integrated"
+    ],
+    "ev_penetrations": [
+      0.1,
+      0.25,
+      0.5
+    ]
+  }
+}

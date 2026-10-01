@@ -1,0 +1,10 @@
+pytest>=8.0,<9
+matplotlib>=3.8,<4
+networkx>=3.2,<4
+numpy>=1.26,<3
+pandas>=2.1,<3
+jupyterlab>=4.0,<5
+
+# Dependências das próximas etapas (instalar conforme o nível do estudo):
+# geopandas, shapely, osmnx, scipy, pandapower, folium, pyomo, highspy,
+# pymoo, deap, openpyxl, pyarrow
